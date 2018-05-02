@@ -1,0 +1,31 @@
+{
+  "0":
+  {
+    "name": "Andrew",
+    "lastname" : "Shvdeov",
+    "age": "18",
+    "gender" : "m"
+  },
+  "1":
+  {
+    "name": "Jhon",
+    "lastname" : "Malkovich",
+    "age": "41",
+    "gender" : "m"
+  },
+  "2":
+  {
+    "name": "Hanna",
+    "lastname" : "Zimmer",
+    "age": "22",
+    "gender" : "f"
+  },
+  "3":
+  {
+    "name": "Mark",
+    "lastname" : "Avr",
+    "age": "56",
+    "gender" : "m"
+  }
+}
+
