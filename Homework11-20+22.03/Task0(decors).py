@@ -1,9 +1,8 @@
-# Задача 0
 from functools import wraps
 import time
 
 
-class Decorators():
+class Decorators(object):
     def decor0(self, func):
         """ декоратор 0, позволяющий вместе с результатом функции возвращать время ее работы """
         def wrapper(*arg):
@@ -42,14 +41,15 @@ class Decorators():
                 return result
         return wrapp
 
-    # TODO
     def decor3(self, f):
         """декоратор, проверяющий типы, переданных декорируемой функции, аргументов"""
 
         @wraps(f)
         def wrapp(*args, **kwargs):
             result = f(*args, **kwargs)
-            print("Type of args, kwargs for func {}: {}, keys:{}, values:{}".format(f.__name__, type(*args))) ###))
+            print(*args)
+            print('''Type of args, values for func {} are args: {},
+                  values:{}'''.format(f.__name__, type(*args), [type(v) for v in kwargs.values()]))
             return result
         return wrapp
 
@@ -57,28 +57,35 @@ class Decorators():
         """декоратор, который кэширует результат работы функции,
         тем самым обеспечивает единственный вызов функции"""
 
-        f.v = None
-        if f.v is None:
-            @wraps(f)
-            def wrapp(*args, **kwargs):
+        @wraps(f)
+        def wrapp(*args, **kwargs):
+
+            if wrapp.value is False:
                 print(f.__name__ + " исполняется")
-                f.v = f(*args, **kwargs)
+                f(*args, **kwargs)
                 print(f.__name__ + " была исполнена")
-                return f.v
-            return wrapp 
-        else:
+                wrapp.value = True
+                return wrapp.value
             return print('It\'s already finished')
+
+        wrapp.value = False
+        return wrapp
+
+
+decor = Decorators()
+
+
+@decor.decor1
+@decor.decor2
+@decor.decor3
+@decor.decor4
+def eratosph(n, k=None):
+    not_prime = {j for i in range(2, n) for j in range(i*2, n, i)}
+    return {i for i in range(2, n) if i not in not_prime}
 
 
 if __name__ == '__main__':
-    decor = Decorators()
+    a1 = eratosph
+    a1(100, k=200)
+    a1(30, k='aaa')
 
-    @decor.decor1
-    @decor.decor2
-    @decor.decor3
-    @decor.decor4
-    def eratosp(n):
-        not_prime = {j for i in range(2, n) for j in range(i*2, n, i)}
-        return {i for i in range(2, n) if i not in not_prime}
-
-    eratosp(100)

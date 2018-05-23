@@ -9,10 +9,11 @@ import json
 # import pdb
 # pdb.set_trace()
 
-
 # First method
+# ЛУЧШИЙ СПОСОБ ЭТО СДЕЛАТЬ -- ПРОСТАЯ ФУНКЦИЯ FACTORY C IF, ELIF
 
-class BaseFile(object):
+
+class Factory(object):
     """
     A 'wrapper' class that overload its __new__() method
     to return instances of the specialized sub-classes
@@ -32,9 +33,9 @@ class BaseFile(object):
             raise NotImplementedError('Files should have extension!')
 
         if cls.file_ext == 'txt':
-            return TXTFile(filename)  # создаст экземпляр класса TXTFile, передав ему filename
+            return TXTFile(filename)  # пересоздаст экземпляр класса Factory как экз. TXTFile, передав ему filename
         elif cls.file_ext == 'json':
-            return JSONFile(filename)  # создаст экземпляр класса JSONFile, передав ему filename
+            return JSONFile(filename)  # пересоздаст экземпляр класса Factory как экз. JSONFile, передав ему filename
         else:
             raise NotImplementedError('Unknown file ext')
 
@@ -102,9 +103,9 @@ class JSONFile(object):
 
 if __name__ == '__main__':
     try:
-        BaseFile('students.json').search('age=18,gender=m')
+        Factory('students.json').search('age=18,gender=m')
         print('***' * 5)
-        BaseFile('studentsdata.txt').search('Andrew,18')
-        BaseFile('somefiletocheck').search()
+        Factory('studentsdata.txt').search('Andrew,18')
+        Factory('somefiletocheck').search()
     except NotImplementedError as e:
         print(e)

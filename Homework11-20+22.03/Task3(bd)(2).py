@@ -7,10 +7,13 @@
 """
 import json
 
+# Second method
+# ЛУЧШИЙ СПОСОБ ЭТО СДЕЛАТЬ -- ПРОСТАЯ ФУНКЦИЯ FACTORY C IF, ELIF
+
 
 class BaseFile(object):
     """
-    Решение задачи с помощью staticmethods python3
+    Решение задачи с помощью staticmethod python3
     Скрипт является ригистратором создаваемых подклассов + метод фабрики их экземпляров
     """
     subclasses = {}  # == registered file_types
